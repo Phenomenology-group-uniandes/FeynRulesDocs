@@ -65,7 +65,7 @@
                 <div class="doc-body row">
                     <div class="doc-content col-md-9 col-12 order-1">
                         <div class="content-inner">
-                            <section id="chartjs" class="doc-section">
+                            <section id="Intro" class="doc-section">
                                 <h2 class="section-title">Introduction</h2>
                                 <div class="section-block">
                                     <p>The following section aims to explain in full detail the implementation of the theoretical model presented in the barchelor thesis of Nicolas Vergara for further detail read the Chapter 3 of the dissertations</p>
@@ -78,7 +78,7 @@
                                   <p>The modification also considers the interactions of the Axion for further analysis. These modifications have led to a full computational model for the minimal singlet majoron.</p>
                                 </div><!--//section-block-->
                                 </section><!--//doc-section-->
-                                <section id="chartjs" class="doc-section">
+                                <section id="Param" class="doc-section">
                                   <h2 class="section-title">Parameter Definition</h2>
                                   <div class="section-block">
                                   <p>After defining the model name and information, the first step is to set the feynman gauge, such that the goldstone modes will be supressed. This is accomplished by setting the command <strong>FeynmanGauge = True</strong>. Then, we initialize the vacuum expectation value as <strong>M\$vevs = { {PhiJ, vevf} }</strong> with its respective scalar field \(\Phi_{J}\). The name $f$ was already occupied by the program, thus we defined the vacuum expectation value as \(\text{vevf}:=f\).</p>
@@ -110,7 +110,7 @@
                                  </div><!--//section-block-->
                                 </div><!--//section-block-->
                                 </section><!--//doc-section-->
-                                <section id="chartjs" class="doc-section">
+                                <section id="Param" class="doc-section">
                                   <h2 class="section-title">Hirerchy Order Definition</h2>
                                   <div class="section-block">
                                   <p>The model file also requires to define the Hierarchy interaction order as <strong>M\$ InteractionOrderHierarchy =\{\}</strong>. This list refers to the the dependence in the coupling constants of each parameter. For example, <strong>QCD</strong> theory fine-structure constant \(\alpha_s\) depends quadratically on the gauge coupling constant \(g_s\) as:</p>
@@ -130,16 +130,19 @@
                                 </div><!--//section-block-->
                                 </section><!--//doc-section-->
 
-                                <section id="chartjs" class="doc-section">
+                                <section id="Fields" class="doc-section">
                                   <h2 class="section-title">Fields Definition</h2>
                                   <div class="section-block">
                                   <p>After setting the default hierarchy interaction order, the user can define the fields, every field generated in the simulation is an object. Then FeynRules define these fields as classes, lets remember that a class is an extensible program-code-template for creation of objects. To define a field, the user implements a template for the class in the list: <strong>M\$ClassesDescription</strong>. The code <a href="#python-Fields">Field Definition Code</a>  exemplifies the definition of a singlet under \(\mathbf{U(1)}\). The theory does not consider a higher order gauge group, so there is no need to define indices. However, in case of a doublet under \(\mathbf{SU(2)}\) indices must be defined before the fields.</p>
                                 <p>The first step is to define the type of particle. <strong>F</strong> stands for fermionic particles, but Feynrules have other allowed types such as:</p>
                                 <ul>
-                                  <li>
-                                  <li>
+                                  <li><strong>S:</strong>Scalar fields
+                                  <li><strong>W:</strong>Weyl fermions (both left- and right-handed)
+                                  <li><strong>V:</strong> Vector fields
                                 </ul>
-
+                                <p>To find the complete list please refer to chapter 2 of the <a href="http://susy.phsx.ku.edu/~kckong/KWS2015/FR_Manual.pdf">Manual</a>. The only mandatory attributes for the definition are the labels: <strong>ClassName</strong> and <strong>SelfConjugate</strong>. The first tag sets the specific name of the particle, and the second tag dictates if the particle is its own antiparticle</p>
+                                <p>For the heavy neutrinos we set the mass and the decay width of the particle. Anyway, this mass value is assigned only to defined variable <strong>Mass->{mN1,300}</strong>, but FeynRules will compute the mass from every quadratic term \(\varphi^2\) in the Lagrangian. Then, the assigned value is used to compare the computed value by FeynRules with the expected defined values. In case of a discrepancy FeynRules emits a warning. Furthermore, this mass and width value can be edited in later software as MadGraph for parameter tuning purposes.</p>
+                                <p>The three following parameter labels:  <strong>PropagatorLabel</strong>, <strong>PropagatorType</strong> and <strong>PropagatorArrow</strong>, fix how the particle is displayed in a diagram generator. Ultimately, the tags <strong>ParticleName</strong>, <strong>PDG</strong> and <strong>FullName</strong> are the unique identifiers of the particle with other programs. The PDG is the unique ID of the particle, in case no PDG is specified MadGraph will assign a PDG automatically. However, it is convenient to assign a PDG by hand, to avoid clashes with additional particles predefined in other software. Fields templates accept additional parameters please refer to the <a href="http://susy.phsx.ku.edu/~kckong/KWS2015/FR_Manual.pdf">Manual</a> to see a full list of them. </p>
                                   <div id="python-Fields" class="section-block">
                                       <div class="code-block">
                                           <h6>Field Definition Code</h6>
@@ -159,16 +162,47 @@
                                                                   		FullName        -> "N1"}}</code></pre>
                                        </div><!--//code-block-->
                                    </div><!--//section-block-->
+                                <p>The complete model file defines a fermionic field for each heavy neutrino \(N1,N2,N3\), with masses of \(300,500,1000\) GeV. Moreover, we have defined three additional scalar fields \(A,J\) and \(\Phi_{J}\). This definition was made by using the tag <strong>Definitions -> {PhiJ -> (vevf + Ax + I J0)/Sqrt[2]}</strong>, which allows to define last scalar field from alredy defined fields in the file.</p>
                                 </div><!--//section-block-->
                                 </section><!--//doc-section-->
+                                <section id="Lagran" class="doc-section">
+                                  <h2 class="section-title">Lagrangian Definition</h2>
+                                  <div class="section-block">
+                                  <p>The final step to complete the model file, is to define the Lagrangian at its full glory. This can be made by the implementation of the same analytical expression of the Lagrangian. The Code <a href="#python-Lagrangian">Lagrangian Definition</a> shows how to write the expression of the following equation:</p>
+                                  <p>\[\mathcal{L}_{Nkin} = \frac{1}{2}\overline{N_k} i\!\not\!\partial N_k - \frac{1}{2}m_{N_k} \overline{N_k}N_k, \quad k=1,2,3\]</p>
+                                  <p> The program requires to specify the spin index for the implemented fields. Besides, the \(\gamma^{\mu}\) matrices are predefined in the FeynRules syntax. Other common operators are define such as: the covariant derivatives, the Weyl projectors, the Minkowski metric tensor, the Levi-Civita tensor, the hermitian conjugate, between others. The chapter 3 of the <a href="http://susy.phsx.ku.edu/~kckong/KWS2015/FR_Manual.pdf">Manual</a> shows a full list of predefined functions. In case of more complex theories another lists must be defined such as gauge groups, super fields, model restrictions and more. </p>
 
+                                  <div id="python-Lagrangian" class="section-block">
+                                      <div class="code-block">
+                                          <h6>Lagrangian Definition</h6>
+                                          <pre><code class="language-python">&gt;&gt;&gt;
+                                            (* ************************** *)
+                                            (* *****   Lagrangian   ***** *)
+                                            (* ************************** *)
+                                            LNKin :=   I/2 N1bar[s1].Ga[v,s1,s2].del[N1[s2],v] - 1/2 mN1 N1bar[s1]N1[s1] \
+                                            	+  I/2 N2bar[s1].Ga[v,s1,s2].del[N2[s2],v] - 1/2 mN2 N2bar[s1]N2[s1] \
+                                            	+  I/2 N3bar[s1].Ga[v,s1,s2].del[N3[s2],v] - 1/2 mN3 N3bar[s1]N3[s1];</code></pre>
+                                       </div><!--//code-block-->
+                                   </div><!--//section-block-->
+                                <p>To avoid defining a whole Lagrangian in a single line, the user can define smaller sections an add them at the final expression as code <a href="#python-Lagrangian-sum">Lagrangian Sum</a> shows. In our model file, all the final Lagrangians presented in chapter 3 of the dissertation are defined.</p>
+                                <div id="python-Lagrangian-sum" class="section-block">
+                                    <div class="code-block">
+                                        <h6>Lagrangian Sum</h6>
+                                        <pre><code class="language-python">&gt;&gt;&gt;
+                                          (* Full N Lagrangian *)
+                                          LN:= LNKin + LNCC + LNNC + LNH + LNG+LNJ+LNJKG;
+                                          (* Combine Lagrangian *)
+                                          LFull := LSM + LN;</code></pre>
+                                     </div><!--//code-block-->
+                                 </div><!--//section-block-->
+                                </div><!--//section-block-->
+                                </section><!--//doc-section-->
                                 <div class="section-block">
                                     <div class="jumbotron text-center">
-                                        <h1>Jumbotron Example</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+                                        <h1>Download the full model and notebook</h1>
                                         <ul class="list list-inline center-block">
-                                            <li class="list-inline-item"><a class="btn btn-cta btn-pink" href="https://themes.3rdwavemedia.com/bootstrap-templates/product/appify-bootstrap-4-admin-template-for-app-developers/" target="_blank"><i class="fas fa-external-link-alt"></i> Appify Details</a></li>
-                                            <li class="list-inline-item"><a class="btn btn-cta btn-primary" href="https://themes.3rdwavemedia.com/bootstrap-templates/product/appify-bootstrap-4-admin-template-for-app-developers/" target="_blank"><i class="fas fa-eye"></i> Appify Demo</a></li>
+                                            <li class="list-inline-item"><a class="btn btn-cta btn-pink" href="https://themes.3rdwavemedia.com/bootstrap-templates/product/appify-bootstrap-4-admin-template-for-app-developers/" target="_blank"><i class="fas fa-download"></i> Model File</a></li>
+                                            <li class="list-inline-item"><a class="btn btn-cta btn-primary" href="https://themes.3rdwavemedia.com/bootstrap-templates/product/appify-bootstrap-4-admin-template-for-app-developers/" target="_blank"><i class="fas fa-download"></i> Notebook</a></li>
                                         </ul>
                                     </div><!--//jumbotron-->
                                 </div><!--//section-->
@@ -180,10 +214,10 @@
                     <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
                         <div id="doc-nav" class="doc-nav">
                             <nav id="doc-menu" class="nav doc-menu flex-column sticky">
-                                <a class="nav-link scrollto" href="#chartjs">Chart.js</a>
-                                <a class="nav-link scrollto" href="#flot">Flot Charts</a>
-                                <a class="nav-link scrollto" href="#morris">Morris.js</a>
-                                <a class="nav-link scrollto" href="#inline">Inline Charts</a>
+                                <a class="nav-link scrollto" href="#Intro">Introduction</a>
+                                <a class="nav-link scrollto" href="#Param">Parameter Definition</a>
+                                <a class="nav-link scrollto" href="#Fields">Fields Definition</a>
+                                <a class="nav-link scrollto" href="#Lagran">Lagrangian Definition</a>
                             </nav><!--//doc-menu-->
                         </div>
                     </div><!--//doc-sidebar-->
