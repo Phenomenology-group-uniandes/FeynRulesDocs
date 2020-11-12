@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap 4 project documentation theme for developers</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- FontAwesome JS -->
+    <script defer src="assets/fontawesome/js/all.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="assets/plugins/lightbox/dist/ekko-lightbox.css">
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+
+</head>
+
+<body class="body-orange">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">Feyn</span><span class="text-bold">Rules</span>
+                        </a>
+                    </h1>
+                </div><!--//branding-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Overview and Workflow</li>
+                </ol>
+                <div class="top-search-box">
+	                 <form class="form-inline search-form justify-content-center" action="" method="get">
+
+			            <input type="text" placeholder="Search..." name="search" class="form-control search-input">
+
+			            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+
+			        </form>
+                </div>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><span aria-hidden="true" class="icon icon_map_alt"></span> Overview &amp; Workflow</h1>
+                    <div class="meta"><i class="far fa-clock"></i> Last updated: Nov 12th, 2020</div>
+                </div><!--//doc-header-->
+                <div class="doc-body row">
+                    <div class="doc-content col-md-9 col-12 order-1">
+                        <div class="content-inner">
+                            <section id="license" class="doc-section">
+                                <h2 class="section-title">Overview</h2>
+                                <div class="section-block">
+                                    <div class="jumbotron text-left">
+                                        <p>FeynRules is the initial step for the study of a novel extension of the SM. It addresses the implementation of particle physics models, which are given in the form of a list of fields, parameters and a Lagrangian. FeynRules computes the underlying Feynman rules needed to build and implement the model into simulation software.</p>
+
+                                        <p>The main problem to develop a computer based theoretical model was that each of the programs for event generation required the model to be written in their own syntax. Besides, implementing a new model often required to modify the event generator underlying code. This means that in some of these programs it was required the hand coding of each vertex. Consequently, the communication between experimental and theoretical physicists was tedious and the models were very error prone.</p>
+                                        <p>To overcome this problem three software were developed, one of them FeynRules. This program aims to provide theorists a quick way to implement their new models into simulation packages using an unified syntax. The approach is based on the implementation of a Lagrangian into a file written in Mathematica language. Then, the software computes the vertices from the Lagrangian and store them into a universal file known as UFO, thus saving theorists time and errors.</p>
+                                        <div class="callout-block callout-success">
+                                            <div class="icon-holder">
+                                                <i class="fas fa-info-circle"></i>
+                                            </div><!--//icon-holder-->
+                                            <div class="content">
+                                                <h4 class="callout-title">Useful Info:</h4>
+                                                <p>The Lagrangian has several parameters and fields, this elements must be defined in the model as objects with certain attributes as group symmetries, dimension and the type of parameter or field and it allows to define models at LO up to NLO.</p>
+                                            </div><!--//content-->
+                                        </div>
+                                        <div class="list list-inline text-center">
+                                            <a class="btn btn-cta btn-orange" href="https://feynrules.irmp.ucl.ac.be/wiki" target="_blank"><i class="icon icon_documents_alt"></i> Check the Oficial Manual of FeynRules</a>
+                                        </div>
+                                    </div><!--//jumbotron-->
+                                </div><!--//section-block-->
+
+                            </section><!--//doc-section-->
+                            <section id="credits" class="doc-section">
+                                <h2 class="section-title">WorkFlow</h2>
+                                <div class="section-block">
+                                  <p>In the LHC occurs around 1 billion collision per second, at which BSM decais could occur as an intermediate or a final state. Given the huge amount of data collected in the LHC, the correct detection of a DM decay, within several noise sources, is rather a complex task. One way to approach this search of DM is to simulate several events for promising decays processes and compare them to similar backgrounds in energy and momentum. This comparison allows to perform an identification of key features that separate the signal from the background or to discard the event for promising detection.</p>
+                                  <p>To perform such analysis first and foremost a computational model is developed through a configuration file that recreates the behavior described by the Lagrangian. The most universal format for a particle physics model is known as Universal FeynRules Output (UFO). The UFO model format is independent of any individual Feynman diagram calculator and it incorporates the full information contained in the model. This model is compatible with multiple frameworks such as MadGraph 5, MadAnalysis 5, Aloha, GoSam and Herwig++. To generate this file one can use a Mathematica-based package called FeynRules, and it permits to write the model in a high level language as it is Mathematica.</p>
+                                  <p>Although FeynRules provides a series of build-in functions that allow superficial validation of the model, other tools are needed to completely verify it. In this work, a Mathematica package known as FeynArts is used for the generation and visualization of Feynman diagrams and amplitudes. Then, the model was being refined from several modifications in FeynRules that were validated in FeynArts, through the comparison of analytical results. Then with the final model, MadGraph 5 can generate all the parameters needed to evolve numerous generated events.</p>
+                                  <div class="speech-bubble text-center">
+                                      <h3 class="speech-title">Usual FlowChart</h3>
+
+                                      <p class="aligncenter">
+                                      <img src="assets/images/explanations/FlowChart.png" alt="FeynRules Ideas" width="60%" align="center">
+                                      </p>
+                                  </div>
+                                  <p>To write the model, it is required to start by entering the details of the new model ina form that can be parsed by FeynRules. Then specify a set of special variables and macros such as: model information, index definitions, model parameters (scalar ortensorial), particle classes, gauge groups, model restrictions, between others3. Next,with all the parameters defined, the full Lagrangian that describes the interactionsin the model can be written. The model can be defined in the interface line byline, but the most practical way is to save the model into a .fr text file. The full implementation of our model is described in the <a href="charts.html">Model Implementation</a> Section.</p>
+                                </div><!--//section-block-->
+
+                            </section><!--//doc-section-->
+
+
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+                        <div id="doc-nav" class="doc-nav">
+                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+                                <a class="nav-link scrollto" href="#license">Overview</a>
+                                <a class="nav-link scrollto" href="#credits">WorkFlow</a>
+                            </nav><!--//doc-menu-->
+                        </div>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->
+
+
+    </div><!--//page-wrapper-->
+
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright">Written by <a href="https://github.com/Switchfools" target="_blank">Nicolás Vergara</a> for phenomenologists</small>
+
+        </div><!--//container-->
+    </footer><!--//footer-->
+
+
+    <!-- Main Javascript -->
+    <script type="text/javascript" src="assets/plugins/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/lightbox/dist/ekko-lightbox.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+
+</body>
+</html>

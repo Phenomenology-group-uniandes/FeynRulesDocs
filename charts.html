@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap 4 project documentation theme for developers</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- FontAwesome JS -->
+    <script defer src="assets/fontawesome/js/all.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="assets/plugins/lightbox/dist/ekko-lightbox.css">
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+
+</head>
+
+<body class="body-blue">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">Feyn</span><span class="text-bold">Rules</span>
+                        </a>
+                    </h1>
+                </div><!--//branding-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Defining the Model</li>
+                </ol>
+                <div class="top-search-box">
+	                 <form class="form-inline search-form justify-content-center" action="" method="get">
+
+			            <input type="text" placeholder="Search..." name="search" class="form-control search-input">
+
+			            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+
+			        </form>
+                </div>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><span aria-hidden="true" class="icon icon_genius"></span> Defining the Model</h1>
+                    <div class="meta"><i class="far fa-clock"></i> Last updated: Nov 12th, 2020</div>
+                </div><!--//doc-header-->
+                <div class="doc-body row">
+                    <div class="doc-content col-md-9 col-12 order-1">
+                        <div class="content-inner">
+                            <section id="chartjs" class="doc-section">
+                                <h2 class="section-title">Introduction</h2>
+                                <div class="section-block">
+                                    <p>The following section aims to explain in full detail the implementation of the theoretical model presented in the barchelor thesis of Nicolas Vergara for further detail read the Chapter 3 of the dissertations</p>
+                                    <div class="list list-inline text-center">
+                                        <a class="btn btn-cta btn-orange" href="http://eds.b.ebscohost.com/eds/detail/detail?vid=2&sid=43ba2ad5-588a-4e87-922a-84cc05911aa8%40pdc-v-sessmgr02&bdata=Jmxhbmc9ZXMmc2l0ZT1lZHMtbGl2ZSZzY29wZT1zaXRl#AN=cpu.833832&db=cat07441a" target="_blank"><i class="icon icon_documents_alt"></i> Theoretical and phenomenological study for the production of heavy neutrinos and majorons at the LHC</a>
+                                    </div>
+                                    <p> </p>
+                                  <p>The SM file has alredy been defined by N. Christensen, C. Duhra and B. Fuks as an included version of the FeynRules package, for that reason we will only define the SM extension.  The model implementation made for this code is based on the work of heavy neutrino production made by R.Ruiz. dditionally, R.Ruiz computational model is based on the Lagrangian proposed by Anupama Atre. Our modification consisted in the addition of the field \(\Phi_j\) with their respective interactions, including the SSB mechanism, and to modify some interactions of the heavy neutrinos to fully match the proposed Lagrangian</p>
+                                  <p>\[\mathcal{L}=\mathcal{L}_{SM}+\mathcal{L}_{Nkin}+\mathcal{L}_{NW}+\mathcal{L}_{NZ}+\mathcal{L}_{Nh}+\mathcal{L}_{NJ}+\mathcal{L}_{NJKG}\]</p>
+                                  <p>The modification also considers the interactions of the Axion for further analysis. These modifications have led to a full computational model for the minimal singlet majoron.</p>
+                                </div><!--//section-block-->
+                                </section><!--//doc-section-->
+                                <section id="chartjs" class="doc-section">
+                                  <h2 class="section-title">Parameter Definition</h2>
+                                  <div class="section-block">
+                                  <p>After defining the model name and information, the first step is to set the feynman gauge, such that the goldstone modes will be supressed. This is accomplished by setting the command <strong>FeynmanGauge = True</strong>. Then, we initialize the vacuum expectation value as <strong>M\$vevs = { {PhiJ, vevf} }</strong> with its respective scalar field \(\Phi_{J}\). The name $f$ was already occupied by the program, thus we defined the vacuum expectation value as \(\text{vevf}:=f\).</p>
+                                <p></p>
+                              <p>The next step is to define the parameters, Feynrules define the parameters as elements of the list \textbf{M\$Parameters}. The parameters can either be scalar or tensorial parameters, this implies that for tensorial parameters the user needs to define indices. There are two types of parameters:</p>
+                                  <ul>
+                                    <li ><strong>External:</strong> external parameters are independent parameters, this means that their numerical value must be assigned by the user.</li>
+                                    <li><strong>Internal:</strong> internal parameters are dependent parameters, such that their value will be  depending on one or several other internal or external parameters of the model.</li>
+                                  </ul>
+                                <p>Our model parameters are the strength of the flavour-changing values of the CKM matrix, and the quartic parameters \(\mu_{J}, \lambda_{J}\) of the following equation </p>
+                                \[\mathcal{L}_{NJKG}= (\partial_{\mu}\Phi_J)^{\dagger}\partial^{\mu}\Phi_J +\mu^2_J\Phi_J^{\dagger}\Phi_J-\lambda_J(\Phi_J^{\dagger}\Phi_J)^2\]
+                                <p>which gives masses to the axion and the majoron.</p>
+                                <p>The CKM matrix can be defined as a tensorial parameter. Nevertheless, R.Ruiz has already defined a bit less than half of the parameters as scalar parameters, thus we decided to keep the definition as scalars.</p>
+                                <p>To define the parameters one can follow the example of <a href="#python-2">Parameters Definition Code</a>, this sets initially if the parameter is either internal or external. Next, the block name is defined, this will be the name of a pointer that will store the value of the parameters. The order of the block defines the position at which this value is saved. Subsequently, the code defines the real value of the parameter.   To define this value the user can use standard Mathematica functions, constants or predefined parameters. Then, the <strong>TeX</strong> label defines the way the parameter will be presented in the notebook interface, this attribute accepts latex like notation. Finally, for big collaborative projects a brief description of the parameter can be added. There are more attributes for a parameter definition, please refer to the <a href="http://susy.phsx.ku.edu/~kckong/KWS2015/FR_Manual.pdf">Manual</a> to see a full list of them.</p>
+                                <div id="python-2" class="section-block">
+                                    <div class="code-block">
+                                        <h6>Parameters Definition Code</h6>
+                                        <pre><code class="language-python">&gt;&gt;&gt;
+              VeN1 == {
+                    ParameterType    -> External,
+                  	BlockName        -> NUMIXING,
+                  	OrderBlock       -> 1,
+                  	Value            -> 1.0,
+                  	ComplexParameter -> False,
+                  	TeX              -> Subscript[V,eN1],
+                    Description      -> "Mixing between ve flavor/gauge state and N1 mass state"
+                  	},</code></pre>
+                                     </div><!--//code-block-->
+                                 </div><!--//section-block-->
+                                </div><!--//section-block-->
+                                </section><!--//doc-section-->
+                                <section id="chartjs" class="doc-section">
+                                  <h2 class="section-title">Hirerchy Order Definition</h2>
+                                  <div class="section-block">
+                                  <p>The model file also requires to define the Hierarchy interaction order as <strong>M\$ InteractionOrderHierarchy =\{\}</strong>. This list refers to the the dependence in the coupling constants of each parameter. For example, <strong>QCD</strong> theory fine-structure constant \(\alpha_s\) depends quadratically on the gauge coupling constant \(g_s\) as:</p>
+                                <p>\[{\displaystyle \alpha _{\text{s}}(k^{2})\ {\stackrel {\mathrm {def} }{=}}\ {\frac {g_{\text{s}}^{2}(k^{2})}{4\pi }}}\]</p>
+                                <p>This means that the interaction order must be defined like <strong>InteractionOrder -> {QCD,2}</strong>. Some programs as MadGraph will use perturbative expansions to compute an amplitude, then if it is not specified the program will only use the higher order parameters. For instance, the EW contribution to the process \(u\overline{u} \rightarrow t\overline{t}\) is a small correction, thus MadGraph by default will only compute the strong force contributions. The code <a href="#python-Hirerchy">Hirerchy Order Code</a> sets the interaction order for the fields and parameters as default, this will set the default behavior of the Monte Carlo generator .</p>
+
+                                  <div id="python-Hirerchy" class="section-block">
+                                      <div class="code-block">
+                                          <h6>Hirerchy Order Code</h6>
+                                          <pre><code class="language-python">&gt;&gt;&gt;
+                                            M$InteractionOrderHierarchy = {
+                                                                          	{QCD,1},
+                                                                          	{QED,2}
+                                                                          };</code></pre>
+                                       </div><!--//code-block-->
+                                   </div><!--//section-block-->
+                                </div><!--//section-block-->
+                                </section><!--//doc-section-->
+
+                                <section id="chartjs" class="doc-section">
+                                  <h2 class="section-title">Fields Definition</h2>
+                                  <div class="section-block">
+                                  <p>After setting the default hierarchy interaction order, the user can define the fields, every field generated in the simulation is an object. Then FeynRules define these fields as classes, lets remember that a class is an extensible program-code-template for creation of objects. To define a field, the user implements a template for the class in the list: <strong>M\$ClassesDescription</strong>. The code <a href="#python-Fields">Field Definition Code</a>  exemplifies the definition of a singlet under \(\mathbf{U(1)}\). The theory does not consider a higher order gauge group, so there is no need to define indices. However, in case of a doublet under \(\mathbf{SU(2)}\) indices must be defined before the fields.</p>
+                                <p>The first step is to define the type of particle. <strong>F</strong> stands for fermionic particles, but Feynrules have other allowed types such as:</p>
+                                <ul>
+                                  <li>
+                                  <li>
+                                </ul>
+
+                                  <div id="python-Fields" class="section-block">
+                                      <div class="code-block">
+                                          <h6>Field Definition Code</h6>
+                                          <pre><code class="language-python">&gt;&gt;&gt;
+                                            M$ClassesDescription = {
+                                                                  	(*Majorana Neutrino*)
+                                                                  	F[131] == {
+                                                                  		ClassName	-> N1,
+                                                                  		SelfConjugate	-> True,
+                                                                  		Mass		-> {mN1,300.},
+                                                                  		Width		-> {WN1,0.303},
+                                                                  		PropagatorLabel	-> "N1",
+                                                                  		PropagatorType  -> Straight,
+                                                                  		PropagatorArrow -> False,
+                                                                  		ParticleName    -> "N1",
+                                                                  		PDG             -> {9900012},
+                                                                  		FullName        -> "N1"}}</code></pre>
+                                       </div><!--//code-block-->
+                                   </div><!--//section-block-->
+                                </div><!--//section-block-->
+                                </section><!--//doc-section-->
+
+                                <div class="section-block">
+                                    <div class="jumbotron text-center">
+                                        <h1>Jumbotron Example</h1>
+                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+                                        <ul class="list list-inline center-block">
+                                            <li class="list-inline-item"><a class="btn btn-cta btn-pink" href="https://themes.3rdwavemedia.com/bootstrap-templates/product/appify-bootstrap-4-admin-template-for-app-developers/" target="_blank"><i class="fas fa-external-link-alt"></i> Appify Details</a></li>
+                                            <li class="list-inline-item"><a class="btn btn-cta btn-primary" href="https://themes.3rdwavemedia.com/bootstrap-templates/product/appify-bootstrap-4-admin-template-for-app-developers/" target="_blank"><i class="fas fa-eye"></i> Appify Demo</a></li>
+                                        </ul>
+                                    </div><!--//jumbotron-->
+                                </div><!--//section-->
+                            </section><!--//doc-section-->
+
+
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+                        <div id="doc-nav" class="doc-nav">
+                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+                                <a class="nav-link scrollto" href="#chartjs">Chart.js</a>
+                                <a class="nav-link scrollto" href="#flot">Flot Charts</a>
+                                <a class="nav-link scrollto" href="#morris">Morris.js</a>
+                                <a class="nav-link scrollto" href="#inline">Inline Charts</a>
+                            </nav><!--//doc-menu-->
+                        </div>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->
+    </div><!--//page-wrapper-->
+
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+          <small class="copyright">Written by <a href="https://github.com/Switchfools" target="_blank">Nicolás Vergara</a> for phenomenologists</small>
+
+        </div><!--//container-->
+    </footer><!--//footer-->
+
+
+    <!-- Main Javascript -->
+    <script type="text/javascript" src="assets/plugins/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/lightbox/dist/ekko-lightbox.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+
+</body>
+</html>

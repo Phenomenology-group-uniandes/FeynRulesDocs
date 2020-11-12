@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap 4 project documentation theme for developers</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- FontAwesome JS -->
+    <script defer src="assets/fontawesome/js/all.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+
+</head>
+
+<body class="body-green">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                          <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                          <span class="text-highlight">Feyn</span><span class="text-bold">Rules</span>
+                        </a>
+                    </h1>
+
+                </div><!--//branding-->
+
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Quick Start</li>
+                </ol>
+
+                <div class="top-search-box">
+	                 <form class="form-inline search-form justify-content-center" action="" method="get">
+
+			            <input type="text" placeholder="Search..." name="search" class="form-control search-input">
+
+			            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+
+			        </form>
+                </div>
+
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> Quick Start</h1>
+                    <div class="meta"><i class="far fa-clock"></i> Last updated: Nov 12th, 2020</div>
+                </div><!--//doc-header-->
+                <div class="doc-body row">
+                    <div class="doc-content col-md-9 col-12 order-1">
+                        <div class="content-inner">
+                            <section id="download-section" class="doc-section">
+                                <h2 class="section-title">Download</h2>
+                                <div class="section-block">
+                                    <p>In order to install FeynRules the user needs to have installed Mathematica in their machines, the installation of mathematica can be refered in the following <a href="https://reference.wolfram.com/language/tutorial/InstallingMathematica.html">link</a> </p>
+                                    <p>In order to install the package of <a href="http://feynrules.irmp.ucl.ac.be/downloads/feynrules-current.tar.gz">FeynRules</a> download the package and untar it.</p>
+                                    <a href="http://feynrules.irmp.ucl.ac.be/downloads/feynrules-current.tar.gz" class="btn btn-green" target="_blank"><i class="fas fa-download"></i> Download FeynRules</a>
+                                </div>
+                            </section><!--//doc-section-->
+                            <section id="installation-section" class="doc-section">
+                                <h2 class="section-title">Installation</h2>
+                                <div id="step1"  class="section-block">
+                                    <h3 class="block-title">Step One</h3>
+                                    <p>After you have alredy untar it, go to the feynrules-current folder and execute the FeynRulesPackage.m file in mathematica there should not be any error messages.</p>
+                                    <p>If there is any error messages refer to the <a href="https://feynrules.irmp.ucl.ac.be">Oficial Page</a></p>
+                                </div><!--//section-block-->
+                                <div id="step2"  class="section-block">
+                                    <h3 class="block-title">Step Two</h3>
+                                    <p>Load the package into a Mathematica session as the following code line</p>
+                                    <div class="code-block">
+                                        <h6>Import the package:</h6>
+                                        <p><code>FeynRulesPath = SetDirectory[ {absolute_path} ]; << FeynRules`</code></p>
+
+                                    </div><!--//code-block-->
+                                    <p>{absolute_path} refers to the address of the package which is the location where the FeynRulesPackage.m is stored. This must be specified as an absolute path</p>
+                                    <p>If the program has been correctly installed the program must have initialized two kernels and run the line whitout errors </p>
+                                    <p>The loading procces should be done before we load any model and everytime that the notebook is restarted</p>
+
+                            </section><!--//doc-section-->
+
+                            <section id="code-section" class="doc-section">
+                              <h2 class="section-title">Overview</h2>
+                              <div class="section-block">
+                                  <p>
+                                      <a href="https://feynrules.irmp.ucl.ac.be/wiki" target="_blank">FeynRules</a> inteends to be an universal model generator. Most of the programs that creates simulations of procecess uses the feynman rules defined at each possible vertex, generating these rules is rather complicated. Nontheless, all of these rules can be derivated from the model Lagrangian. FeynRules takes advantage of this fact and
+                                      derive the Feynman rules from a modelfile which defines a Lagrangian and some extra parameters to define unambiguously the desired model.
+
+                                  </p>
+                                  <p class="aligncenter">
+                                  <img src="assets/images/explanations/Machine.png" alt="FeynRules Ideas" width="60%" align="center">
+                                  </p>
+                                  <p>
+                                    Along this Quick Review we will learn to implement a simple model into the FeynRules framework and then to export the Feynman Rules at each vertex to a generic file output
+                                  </p>
+                                    <div class="callout-block callout-success">
+                                        <div class="icon-holder">
+                                            <i class="fas fa-thumbs-up"></i>
+                                        </div><!--//icon-holder-->
+                                        <div class="content">
+                                            <h4 class="callout-title">Useful Tip:</h4>
+                                            <p>The Feynman rules can be stored in different types of files. However the most relevant type of output file is the Universal Feynman Output (UFO) given that its unified syntax works for most of the event generation softwares</p>
+                                        </div><!--//content-->
+                                    </div>
+
+                              </div><!--//section-block-->
+                            </section>
+                            <section id="callouts-section" class="doc-section">
+                                <h2 class="section-title">Model Review</h2>
+                                <div class="section-block">
+                                  <p>This implementation is inspired on the FeynRules <a href="https://feynrules.irmp.ucl.ac.be/raw-attachment/wiki/WikiStart/Manual.pdf">Manual</a>, refer to it in order to have a deeping understanding of the construction of FeynRules</p>
+                                  </div>
+                                  <div class="section-block">
+                                      <div class="callout-block callout-info">
+                                          <div class="icon-holder">
+                                              <i class="fas fa-info-circle"></i>
+                                          </div><!--//icon-holder-->
+                                          <div class="content">
+                                              <h4 class="callout-title">Key Specs</h4>
+                                  <p>The model under consideration is a variant of the \(\phi^{4}\) theory. It displays all the most relevant features the user might encounter when implementing a new model. In particular, it shows how to:</p>
+                                  <ul>
+                                    <li> define indices of various types</li>
+                                    <li> Perform expasion of flavor incides </li>
+                                    <li> define mixing matrices </li>
+                                    <li>perform the rotation from the gauge eigenstates to the mass eigenstates </li>
+                                    <li>add gauge interactions to the model </li>
+                                  </ul>
+                                  </div><!--//content-->
+                                    </div><!--//callout-block-->
+                                    <div class="section-block">
+                                      <p>the model consist of two complex scalar fields \(\phi_{i}(x), ~i=1,2 ~\)  that interacts as the following lagrangian shows</p>
+                                      \[ \mathcal{L}= \partial_{\mu}\phi_{i}^{\dagger}\partial^{\mu}\phi_{i}-\phi^{\dagger}_{i}\mathcal{M}_{ij}\phi_{j}+(\phi_{i}^{\dagger}\lambda_{ij}\phi_{j})^2\]
+                                      <p>please notice that every field is a doublet, such that \(\mathcal{M}_{ij}~\) and \(\lambda_{ij}~\) are real square matrices. We define the matrices such that they can be symmetric, in the following way</p>
+                                      \[\mathcal{M}=\begin{bmatrix}m_1^2& \frac{m^{2}_{12}}{2}\\ \frac{m^{2}_{12}}{2} & m_2^2\end{bmatrix} ~~\lambda= \begin{bmatrix}\lambda_{11} & \lambda_{12}\\ \lambda_{12} & \lambda_{22}\end{bmatrix} \]
+                                      <p>As the matrix is not diagonal the fields \(\phi_{i}(x), ~i=1,2 ~\) are not eigenstates, then in order to have the measurable fields it's necessary to make an unitary transformation in order to find the representation of the lagrangian in the mass-eigenstates space </p>
+                                      \[\phi_{i}=U_{ij}\Phi_{j}~~~ U^{T}\mathcal{M}U=\begin{bmatrix}M_1^2& 0\\ 0 & M_2^2\end{bmatrix} \]
+                                      <p>Given that we need to define the rotation matrix, one needs to compute the eigenvalues and eigenvectors of the representation, this can be computed by hand or with some software tools, note that as we are fiding mass-eigenstates then the couplings are going to be dependent of the mixing of the gauge states.</p>
+                                      <p>Then the mass eigen values are</p>
+                                      \[M_{1,2}^2= \frac{1}{2}\left(m_1^2 + m_2^2 \pm \sqrt{(m_1^2-m_2^2)^2+m_{12}^{4}}\right)\]
+                                      <p>In order to obtain this eigenstates one need to parametrize the rotation matrix\(U~\)  as </p>
+                                      \[U=\begin{bmatrix}-sin\theta& cos\theta\\ cos\theta & sin\theta\end{bmatrix} \]
+                                      where the sine of the angles reads as
+                                      \[sin\theta=\frac{m_{12}^2}{\sqrt{m_{12}^4+\left(m_1^2-m_2^2+\sqrt{(m_1^2-m_2^2)^2+m_{12}^4}\right)}}\]
+                                      <p>Having alredy define the model one can define the model-file from the lagrangian in the eigen-mass space</p>
+                                      </div>
+                            </section><!--//doc-section-->
+                            <section id="code-section" class="doc-section">
+                                <h2 class="section-title">Model Implementation</h2>
+                                <div class="section-block">
+                                  <p>This implementation is inspired on the FeynRules <a href="https://feynrules.irmp.ucl.ac.be/raw-attachment/wiki/WikiStart/Manual.pdf">Manual</a>, refer to it in order to have a deeping understanding of the construction of FeynRules</p>
+                                  </div>
+                                  <div class="section-block">
+                                      <div class="callout-block callout-info">
+                                          <div class="icon-holder">
+                                              <i class="fas fa-info-circle"></i>
+                                          </div><!--//icon-holder-->
+                                          <div class="content">
+                                              <h4 class="callout-title">Defining the model as a (.fr) file </h4>
+                                  <p>Feynrules needs a model-file(.fr) which describes the basic Interactions of the implemented lagrangian. Thus the Feynman rules can be computed from this model-file, FeynRules is not restricted to Standard Model(SM) interations, actually any QFT model can be implemented and tested in order to develop new physics. Feynrules computes Feynman rules at Leading Order(LO), in case that the user wants to implement calculations at Next to Leadin Order(NLO) level, one needs to include certain consideration to the model-file.</p>
+                                  </div><!--//content-->
+                                    </div><!--//callout-block-->
+                                    <div class="section-block">
+                                    <p>Along this section it will be explained step by step how to implement the full <a>FirstModel.fr</a> file. The first step is optional, in this part we summarize the model information for things like the author, institution and metadata necessary to recognize the work implemented by every author, it can be done as the following way: </p>
+                                    </div>
+                                  </div><!--//section-block-->
+                                  <div id="python" class="section-block">
+                                      <div class="code-block">
+                                          <h6>Metadata Code Example</h6>
+                                          <pre><code class="language-python">&gt;&gt;&gt;
+                                            M$ModelName = "First_Model";
+                                            M$Information = {
+                                                 Authors -> "N.Vergara-Duran",
+                                                 Institution -> "U.Andes",
+                                                 Email -> "nf.vergara10@uniandes.edu.co",
+                                                 Date -> "Feb, 11 2020",
+                                                 References -> {"The Feynrules Manual"}
+                                            };
+                                           </code></pre>
+                                      </div><!--//code-block-->
+                                  </div><!--//section-block-->
+
+                                  <div class="section-block">
+                                  <p>After it has been properly cited, then we can start with the model itself, in this section we must define the indices for our fields and matrices, here it's where it's satated the dimesonality of the parameters in the spinor space. We will chose that the indices for the lagrangian would be in a range 2 given that we are working with doublets for the field, and clearly the index must be of type scalar. Each index denotes an object of the form <strong>Index[name, i]</strong>, and it can have different types as it's Lorentz, Spin or Weyl spinors. Moreover, the indices of type <strong>Lorentz, Spin, Spin1 and Spin2 </strong>are defined internally and do not need to be defined by the user. In addition, it is possible to specify how the different types of indices should
+                                    be printed on the screen. This is done via the <strong>IndexStyle</strong> command</p>
+                                  </div>
+                                  <div id="python" class="section-block">
+                                      <div class="code-block">
+                                          <h6>Code Example</h6>
+                                          <pre><code class="language-python">&gt;&gt;&gt;
+                                            IndexRange[ Index[Scalar] ] = Range[2];
+                                            IndexStyle[ Scalar, i];
+                                           </code></pre>
+                                      </div><!--//code-block-->
+                                  </div><!--//section-block-->
+                                  <div class="section-block">
+                                  <p>After defining all the types of indices, the fundamental part of the model is to define the parameters (coupling constants, mixing angles and matrices, masses, etc.). All of this parameters must be stated on the following brakets  </p>
+                                  </div>
+                                  <div id="python" class="section-block">
+                                      <div class="code-block">
+                                          <h6>Code Example</h6>
+                                          <pre><code class="language-python">&gt;&gt;&gt;
+                                           M$Parameters = {};</code></pre>
+                                       </div><!--//code-block-->
+                                   </div><!--//section-block-->
+                                   <div class="section-block">
+                                   <p>Each component of this list consists of an equality whose left-hand side is a label and the right-hand side is a list of Mathematica replacement rules, parameters can either be internal or external this would if either the parameter is indepent an it's given as an input or either the parameter is dependet(internal) of the independent parameters of the model. </p>
+
+                                   </div>
+                                   <div id="python" class="section-block">
+                                       <div class="code-block">
+                                           <h6>Code Example</h6>
+                                           <pre><code class="language-python">&gt;&gt;&gt;
+                                             lam == {
+                                               ParameterType -> External, ComplexParameter -> False,
+                                               Indices -> {Index[Scalar], Index[Scalar]},
+                                               Value -> {lam[1, 1] -> 0.9, lam[1, 2] -> 0.1, lam[2, 1] -> 0.1,
+                                                  lam[2, 2] -> 0.9},
+                                               Description -> "Scalar quartic coupling matrix"},</code></pre>
+                                        </div><!--//code-block-->
+                                    </div><!--//section-block-->
+                                    <div id="python" class="section-block">
+                                        <div class="code-block">
+                                            <h6>Code Example</h6>
+                                            <pre><code class="language-python">&gt;&gt;&gt;
+                                              MM == {
+                                                ParameterType -> External,
+                                                ComplexParameter -> False,
+                                                Indices -> {Index[Scalar], Index[Scalar]},
+                                                Value -> {MM[1, 1] -> 100^2,
+                                                   MM[1, 2] -> 10^2/2,
+                                                   MM[2, 1] -> 10^2/2,
+                                                    MM[2, 2] -> 200^2},
+                                                 Description -> "Mass matrix"},</code></pre>
+                                         </div><!--//code-block-->
+                                     </div><!--//section-block-->
+
+                            </section><!--//doc-section-->
+                            <section id="code-section" class="doc-section">
+                                <h2 class="section-title">Computing Feynman Rules</h2>
+                                <div class="section-block">
+                                  <p>After the model description is created and the Lagrangian constructed, it can be loaded into FeynRules and the Feynman rules will be obtained. The first thing that must be done when using FeynRules is to load the package into a Mathematica session as following</p>
+                                  </div>
+
+                                  <div id="python" class="section-block">
+                                      <div class="code-block">
+                                          <h6>Metadata Code Example</h6>
+                                          <pre><code class="language-python">&gt;&gt;&gt;
+                                            FeynRulesPath = SetDirectory[  ]; << FeynRules`
+                                           </code></pre>
+                                      </div><!--//code-block-->
+                                  </div><!--//section-block-->
+
+                                  <div class="section-block">
+                                  <p>The model can be loaded using the command <strong>LoadModel</strong>, every file that's not in the curren directory, in order to load it must be specified the respective path of the file. Also the model must be loaded every time it's modified.</p>
+                                </div>
+                                  <div id="python" class="section-block">
+                                      <div class="code-block">
+                                          <h6>Code Example</h6>
+                                          <pre><code class="language-python">&gt;&gt;&gt;
+                                            LoadModel[ < file.fr >, < file2.fr >, ... ]
+                                           </code></pre>
+                                      </div><!--//code-block-->
+                                  </div><!--//section-block-->
+                                  <div class="section-block">
+                                  <p>After the model is loaded and the Lagrangian is defined, the Feynman rules can be extracted using the command <strong>FeynmanRules</strong>.</p>
+                                  </div>
+                                  <div id="python" class="section-block">
+                                      <div class="code-block">
+                                          <h6>Code Example</h6>
+                                          <pre><code class="language-python">&gt;&gt;&gt;
+                                           FeynmanRules[ Lscal ]</code></pre>
+                                       </div><!--//code-block-->
+                                   </div><!--//section-block-->
+                                   <div class="section-block">
+                                   <p>There is also an enormous number of functions that can be used in order to analyze and confirm that the model was correted implemented in the file. All this commands can be viewed in the <a href="charts.html"> Defining the model </a> section.  </p>
+                                 </div>
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+                        <div id="doc-nav" class="doc-nav">
+
+	                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+	                                <a class="nav-link scrollto" href="#download-section">Download</a>
+	                                <a class="nav-link scrollto" href="#installation-section">Installation</a>
+                                    <nav class="doc-sub-menu nav flex-column">
+                                        <a class="nav-link scrollto" href="#step1">Step One</a>
+                                        <a class="nav-link scrollto" href="#step2">Step Two</a>
+                                    </nav><!--//nav-->
+
+	                            </nav><!--//doc-menu-->
+
+                        </div>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->
+
+    </div><!--//page-wrapper-->
+
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+              <small class="copyright">Written by <a href="https://github.com/Switchfools" target="_blank">Nicolás Vergara</a> for phenomenologists</small>
+        </div><!--//container-->
+    </footer><!--//footer-->
+
+
+    <!-- Main Javascript -->
+    <script type="text/javascript" src="assets/plugins/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+
+</body>
+</html>
